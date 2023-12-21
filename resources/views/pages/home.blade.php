@@ -881,88 +881,27 @@
                             }
                         }">
                             <div class="swiper-wrapper row cols-lg-6 cols-md-5 cols-sm-3 cols-2">
+                                @foreach ($prodcats as $prodcat )                            
+                                
                                 <div
                                     class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
                                     <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-1.jpg')}}" alt="Category"
+                                        <img src="{{ Storage::url($prodcat->logo) }}" alt="Category"
                                             width="130" height="130">
                                     </a>
                                     <div class="category-content">
-                                        <h4 class="category-name">Fashion</h4>
+                                        <h4 class="category-name">{{ $prodcat->name }}</h4>
                                         <a href="shop-banner-sidebar.html"
                                             class="btn btn-primary btn-link btn-underline">Shop
                                             Now</a>
                                     </div>
                                 </div>
-                                <div
-                                    class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                                    <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-2.jpg')}}" alt="Category"
-                                            width="130" height="130">
-                                    </a>
-                                    <div class="category-content">
-                                        <h4 class="category-name">Furniture</h4>
-                                        <a href="shop-banner-sidebar.html"
-                                            class="btn btn-primary btn-link btn-underline">Shop
-                                            Now</a>
-                                    </div>
-                                </div>
-                                <div
-                                    class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                                    <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-3.jpg')}}" alt="Category"
-                                            width="130" height="130">
-                                    </a>
-                                    <div class="category-content">
-                                        <h4 class="category-name">Shoes</h4>
-                                        <a href="shop-banner-sidebar.html"
-                                            class="btn btn-primary btn-link btn-underline">Shop
-                                            Now</a>
-                                    </div>
-                                </div>
-                                <div
-                                    class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                                    <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-4.jpg')}}" alt="Category"
-                                            width="130" height="130">
-                                    </a>
-                                    <div class="category-content">
-                                        <h4 class="category-name">Sports</h4>
-                                        <a href="shop-banner-sidebar.html"
-                                            class="btn btn-primary btn-link btn-underline">Shop
-                                            Now</a>
-                                    </div>
-                                </div>
-                                <div
-                                    class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                                    <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-5.jpg')}}" alt="Category"
-                                            width="130" height="130">
-                                    </a>
-                                    <div class="category-content">
-                                        <h4 class="category-name">Games</h4>
-                                        <a href="shop-banner-sidebar.html"
-                                            class="btn btn-primary btn-link btn-underline">Shop
-                                            Now</a>
-                                    </div>
-                                </div>
-                                <div
-                                    class="swiper-slide category category-classic category-absolute overlay-zoom br-xs">
-                                    <a href="shop-banner-sidebar.html" class="category-media">
-                                        <img src="{{asset('main/assets/images/demos/demo1/categories/2-6.jpg')}}" alt="Category"
-                                            width="130" height="130">
-                                    </a>
-                                    <div class="category-content">
-                                        <h4 class="category-name">Computers</h4>
-                                        <a href="shop-banner-sidebar.html"
-                                            class="btn btn-primary btn-link btn-underline">Shop
-                                            Now</a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
+
             </section>
             <!-- End of .category-section top-category -->
 
