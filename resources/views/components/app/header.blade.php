@@ -1,80 +1,7 @@
 @php
     $states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 @endphp
-<style>
-    /* .ec-select-inner::after {
-        top: 10px !important;
-    } */
 
-    #map {
-        height: 400px;
-    }
-
-    .custom-select {
-        font-size: 16px;
-        color: #333;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        padding: 5px;
-        width: 200px;
-    }
-
-    /* Style the suggestion list */
-    #suggestionList {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        max-height: 150px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        background-color: #fff;
-    }
-
-    /* Style individual suggestions */
-    #suggestionList li {
-        padding: 8px 16px;
-        cursor: pointer;
-    }
-
-    /* Highlight suggestion on hover */
-    #suggestionList li:hover {
-        background-color: #f0f0f0;
-    }
-
-    .location-search {
-        height: 50px !important;
-    }
-
-    .location-city {
-        width: 70%;
-    }
-
-    #cityInput {
-        height: 51px;
-    }
-
-    @media only screen and (max-width: 767px) {
-        .location-search {
-            height: 45px !important;
-        }
-
-        .location-search-group {
-            width: 50% !important;
-        }
-
-        .location-city {
-            width: 50% !important;
-        }
-
-        #cityInput {
-            height: 45px;
-        }
-    }
-
-    .select2-selection {
-        height: 50px;
-    }
-</style>
 
 @php
     use App\Models\Prodcat;
@@ -88,514 +15,759 @@
     $route = route('shops');
 
 @endphp
-<header class="ec-header">
-    <!--Ec Header Top Start -->
+<header class="header">
     <div class="header-top">
         <div class="container">
-            <div class="row align-items-center">
-                <!-- Header Top social Start -->
-                <div class="col text-left header-top-left d-none d-lg-block">
-                    <!-- <div class="header-top-social">
-                        <span class="social-text text-upper">Follow us on:</span>
-                        <ul class="mb-0">
-                            <li class="list-inline-item"><a class="hdr-facebook" href="#"><i
-                                        class="ecicon eci-facebook"></i></a></li>
-                            <li class="list-inline-item"><a class="hdr-twitter" href="#"><i
-                                        class="ecicon eci-twitter"></i></a></li>
-                            <li class="list-inline-item"><a class="hdr-instagram" href="#"><i
-                                        class="ecicon eci-instagram"></i></a></li>
-                            <li class="list-inline-item"><a class="hdr-linkedin" href="#"><i
-                                        class="ecicon eci-linkedin"></i></a></li>
-                        </ul>
-                    </div> -->
-                </div>
-                <!-- Header Top social End -->
-                <!-- Header Top Message Start -->
-                <!-- <div class="col text-center header-top-center">
-                    <div class="header-top-message text-upper">
-                        <span>Free Shipping</span>This Week Order Over - $75
-                    </div>
-                </div> -->
-                <div class="col tab-logo">
-                    <div class="header-logo">
-                        <a href="{{ route('homepage') }}"><img src="{{ Voyager::image(setting('site.logo')) }}"
-                                alt="{{ setting('site.title') }}"></a>
+            <div class="header-left">
+                <p class="welcome-msg">Welcome to Wolmart Store message or remove it!</p>
+            </div>
+            <div class="header-right">
+                <div class="dropdown">
+                    <a href="#currency">USD</a>
+                    <div class="dropdown-box">
+                        <a href="#USD">USD</a>
+                        <a href="#EUR">EUR</a>
                     </div>
                 </div>
-                <!-- Header Top Message End -->
-                <!-- Header Top Language Currency -->
-                <div class="col header-top-right d-none d-lg-block">
-                    <div class="header-top-lan-curr d-flex justify-content-end">
-                        <!-- Currency Start -->
-                        <div class="header-top-curr dropdown">
-                            <button class="dropdown-toggle text-upper" data-bs-toggle="dropdown">Currency <i
-                                    class="ecicon eci-caret-down" aria-hidden="true"></i></button>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a class="dropdown-item" href="#">USD $</a></li>
-                                <li><a class="dropdown-item" href="#">EUR €</a></li>
-                            </ul>
-                        </div>
-                        <!-- Currency End -->
-                        <!-- Language Start -->
-                        <div class="header-top-lan dropdown">
-                            <button class="dropdown-toggle text-upper" data-bs-toggle="dropdown">Language <i
-                                    class="ecicon eci-caret-down" aria-hidden="true"></i></button>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a class="dropdown-item" href="#">English</a></li>
-                                <li><a class="dropdown-item" href="#">Italiano</a></li>
-                            </ul>
-                        </div>
-                        <!-- Language End -->
+                <!-- End of DropDown Menu -->
 
-                    </div>
-                </div>
-                <!-- Header Top Language Currency -->
-                <!-- Header Top responsive Action -->
-                <div class="col d-lg-none ">
-                    <div class="ec-header-bottons">
-                        <!-- Header User Start -->
-
-
-                        <!-- Header User End -->
-                        <!-- Header Cart Start -->
-                        {{-- <a href="{{ route('location.search') }}" class="ec-header-btn ec-header-wishlist">
-                            <div class="header-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            
-                        </a> --}}
-                        <div
-                            style="display: flex;width:180px;align-items:center;border-right: 2px solid;
-                        padding-right: 5px;">
-                            <i class="fas fa-map-marker-alt ml-1"></i>
-                            <a class="ms-2" href="javascript:void(0)" data-bs-toggle="modal"
-                                data-bs-target="#location" style="font-size: 14px;line-height: 16px;font-weight: 500;">
-                                @if (session()->has('state') || session()->has('post_city'))
-                                    @if (session()->has('post_city'))
-
-                                        @foreach (session()->get('post_city') as $item)
-                                            {{ $item }}
-                                        @endforeach
-                                        ,
-                                    @endif
-                                    {{ session()->get('state') }}
-                                @else
-                                    Set Location
-                                @endif
-                            </a>
-                        </div>
-                        <!-- Header Cart End -->
-                        <!-- Header Cart Start -->
-                        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
-                            <div class="header-icon"><i class="fi-rr-shopping-bag"></i></div>
-
-                            <span class="ec-header-count cart-count-lable" id="cartQty2">0</span>
-
+                <div class="dropdown">
+                    <a href="#language"><img src="assets/images/flags/eng.png" alt="ENG Flag" width="14"
+                            height="8" class="dropdown-image" /> ENG</a>
+                    <div class="dropdown-box">
+                        <a href="#ENG">
+                            <img src="assets/images/flags/eng.png" alt="ENG Flag" width="14" height="8"
+                                class="dropdown-image" />
+                            ENG
                         </a>
-                        <!-- Header Cart End -->
-                        <!-- <a href="javascript:void(0)" class="ec-header-btn ec-sidebar-toggle">
-                            <i class="fi fi-rr-apps"></i>
-                        </a> -->
-                        <!-- Header menu Start -->
-                        <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
-                            <i class="fi fi-rr-menu-burger"></i>
+                        <a href="#FRA">
+                            <img src="assets/images/flags/fra.png" alt="FRA Flag" width="14" height="8"
+                                class="dropdown-image" />
+                            FRA
                         </a>
-                        <!-- Header menu End -->
                     </div>
                 </div>
-                <!-- Header Top responsive Action -->
+                <!-- End of Dropdown Menu -->
+                <span class="divider d-lg-show"></span>
+                <a href="blog.html" class="d-lg-show">Blog</a>
+                <a href="contact-us.html" class="d-lg-show">Contact Us</a>
+                <a href="my-account.html" class="d-lg-show">My Account</a>
+                <a href="assets/ajax/login.html" class="d-lg-show login sign-in"><i
+                        class="w-icon-account"></i>Sign In</a>
+                <span class="delimiter d-lg-show">/</span>
+                <a href="assets/ajax/login.html" class="ml-0 d-lg-show login register">Register</a>
             </div>
         </div>
     </div>
-    <!-- Ec Header Top  End -->
-    <!-- Ec Header Bottom  Start -->
-    <div class="ec-header-bottom d-none d-lg-block">
-        <div class="container position-relative">
-            <div class="row">
-                <div class="ec-flex">
-                    <!-- Ec Header Logo Start -->
+    <!-- End of Header Top -->
 
-                    <div class="align-self-center">
-                        <div class="header-logo">
-                            <a href="{{ route('homepage') }}"><img src="{{ Voyager::image(setting('site.logo')) }}"
-                                    alt="{{ setting('site.title') }}"></a>
-                        </div>
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left mr-md-4">
+                <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
+                </a>
+                <a href="demo1.html" class="logo ml-lg-0">
+                    <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
+                </a>
+                <form method="get" action="#"
+                    class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
+                    <div class="select-box">
+                        <select id="category" name="category">
+                            <option value="">All Categories</option>
+                            <option value="4">Fashion</option>
+                            <option value="5">Furniture</option>
+                            <option value="6">Shoes</option>
+                            <option value="7">Sports</option>
+                            <option value="8">Games</option>
+                            <option value="9">Computers</option>
+                            <option value="10">Electronics</option>
+                            <option value="11">Kitchen</option>
+                            <option value="12">Clothing</option>
+                        </select>
                     </div>
-                    <!-- Ec Header Logo End -->
+                    <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
+                        required />
+                    <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="header-right ml-4">
+                <div class="header-call d-xs-show d-lg-flex align-items-center">
+                    <a href="tel:#" class="w-icon-call"></a>
+                    <div class="call-info d-lg-show">
+                        <h4 class="chat font-weight-normal font-size-md text-normal ls-normal text-light mb-0">
+                            <a href="https://portotheme.com/cdn-cgi/l/email-protection#fad9" class="text-capitalize">Live Chat</a> or :</h4>
+                        <a href="tel:#" class="phone-number font-weight-bolder ls-50">0(800)123-456</a>
+                    </div>
+                </div>
+                <a class="wishlist label-down link d-xs-show" href="wishlist.html">
+                    <i class="w-icon-heart"></i>
+                    <span class="wishlist-label d-lg-show">Wishlist</span>
+                </a>
+                <a class="compare label-down link d-xs-show" href="compare.html">
+                    <i class="w-icon-compare"></i>
+                    <span class="compare-label d-lg-show">Compare</span>
+                </a>
+                <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
+                    <div class="cart-overlay"></div>
+                    <a href="#" class="cart-toggle label-down link">
+                        <i class="w-icon-cart">
+                            <span class="cart-count">2</span>
+                        </i>
+                        <span class="cart-label">Cart</span>
+                    </a>
+                    <div class="dropdown-box">
+                        <div class="cart-header">
+                            <span>Shopping Cart</span>
+                            <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
+                        </div>
 
-                    <!-- Ec Header Search Start -->
-                    <div class="align-self-center">
-                        <div class="header-search">
-                            <form class="ec-btn-group-form d-flex" action="{{ route('shops') }}" method="get">
-                                <div id="desktop-search" class="ec-sort-select ">
-
-                                    <div class="ec-select-inner-cat ec-select-inner header-drop">
-
-                                        <select name="category" id="ec-select" style="border: 1px solid #373737;">
-                                            <option selected value="">Categories</option>
-                                            @foreach ($categories as $category)
-                                                <option @if (request('category') == $category->slug) selected @endif
-                                                    value="{{ $category->slug }}">{{ $category->name }}</option>
-                                                @foreach ($category->childrens as $child)
-                                                    <option value="{{ $child->slug }}" style="font-weight:300">
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $child->name }}
-                                                    </option>
-                                                @endforeach
-                                            @endforeach
-
-
-                                        </select>
-
+                        <div class="products">
+                            <div class="product product-cart">
+                                <div class="product-detail">
+                                    <a href="product-default.html" class="product-name">Beige knitted
+                                        elas<br>tic
+                                        runner shoes</a>
+                                    <div class="price-box">
+                                        <span class="product-quantity">1</span>
+                                        <span class="product-price">$25.68</span>
                                     </div>
                                 </div>
-                                <input class="form-control ec-search-bar" style="border: 1px solid #373737;"
-                                    name="search" value="{{ request('search') }}" placeholder="Search products..."
-                                    type="text">
-                                <button class="submit header-search-btn" type="submit"><i
-                                        class="fi-rr-search"></i></button>
-
-                            </form>
-
-
-                        </div>
-
-                    </div>
-
-                    <!-- Ec Header Search End -->
-
-                    <!-- Ec Header Button Start -->
-                    <div class="align-self-center">
-                        <div class="ec-header-bottons"
-                            style="
-                        align-items: baseline;
-                    ">
-
-                            <!-- Header User Start -->
-                            <div class="ec-header-user dropdown">
-                                <button class="dropdown-toggle" data-bs-toggle="dropdown">
-
-                                    <i class="fi-rr-user" style="font-size: 20px"></i>
-                                    @if (Auth::check())
-                                        <span class="ms-2 pe-1"
-                                            style="border-right: 1px solid #000000;">{{ auth()->user()->name }}</span>
-                                    @endif
+                                <figure class="product-media">
+                                    <a href="product-default.html">
+                                        <img src="assets/images/cart/product-1.jpg" alt="product" height="84"
+                                            width="94" />
+                                    </a>
+                                </figure>
+                                <button class="btn btn-link btn-close" aria-label="button">
+                                    <i class="fas fa-times"></i>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    @guest
-                                        @if (Route::has('register'))
-                                            <li>
-                                                <a class=" dropdown-item"
-                                                    href="{{ route('register') }}">{{ __('Register') }}</a>
-
-                                            </li>
-                                            <li>
-                                                <a class=" dropdown-item"
-                                                    href="{{ route('vendor.create') }}">{{ __('Register as Vendor') }}</a>
-
-                                            </li>
-                                            <li>
-                                                <a class=" dropdown-item"
-                                                    href="{{ route('login') }}">{{ __('Log In') }}</a>
-
-                                            </li>
-                                        @endif
-                                    @else
-                                        <li>
-
-
-                                            @if (Auth()->user())
-                                                <a class="dropdown-item" href="{{ route('user.dashboard') }}">User
-                                                    Profile</a>
-                                            @endif
-                                            @if (Auth()->user()->role_id == 3)
-                                                <a class="dropdown-item" href="{{ route('vendor.dashboard') }}">Vendor
-                                                    Profile</a>
-                                            @endif
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-
-                                        </li>
-                                    @endguest
-                                </ul>
                             </div>
-                            <!-- Header User End -->
-                            <!-- Header wishlist Start -->
 
-                            <!-- Header wishlist End -->
-                            <!-- Header Cart Start -->
-                            <a href="{{ route('homepage', ['cart' => 'show']) }}" class="ec-header-btn">
-                                <div class="header-icon">
-                                    <i class="fa-solid fa-cart-shopping" style="font-size: 20px"></i>
+                            <div class="product product-cart">
+                                <div class="product-detail">
+                                    <a href="product-default.html" class="product-name">Blue utility
+                                        pina<br>fore
+                                        denim dress</a>
+                                    <div class="price-box">
+                                        <span class="product-quantity">1</span>
+                                        <span class="product-price">$32.99</span>
+                                    </div>
                                 </div>
+                                <figure class="product-media">
+                                    <a href="product-default.html">
+                                        <img src="assets/images/cart/product-2.jpg" alt="product" width="84"
+                                            height="94" />
+                                    </a>
+                                </figure>
+                                <button class="btn btn-link btn-close" aria-label="button">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
 
-                                <span class="ec-header-count cart-count-lable" id="cartQty">0</span>
+                        <div class="cart-total">
+                            <label>Subtotal:</label>
+                            <span class="price">$58.67</span>
+                        </div>
 
-                            </a>
-                            @auth
-
-                                @php
-                                    $notifications = App\Models\Notification::where('user_id', auth()->id())
-                                        ->where('status', 0)
-                                        ->latest()
-                                        ->get();
-
-                                @endphp
-
-                                <div class=" dropdown" style="margin-left: 0;">
-                                    <button class="" style="margin-left:0" data-bs-toggle="dropdown">
-                                        @if ($notifications->count() > 0)
-                                            <span class="ec-header-count"
-                                                style="background-color: rgba(216, 25, 25, 0.82);padding:2px 7px;border-radius:50%;position:absolute;top: -11px;font-size: 11px;font-weight: 600;color: #fff;">{{ $notifications->count() }}</span>
-                                        @endif
-                                        <div class="header-icon">
-                                            <i class="fa-solid fa-bell" style="font-size: 20px"></i>
-                                        </div>
-                                    </button>
-
-                                    <ul class="dropdown-menu">
-                                        @if ($notifications->count() > 0)
-                                            @foreach ($notifications as $notification)
-                                                <li class="d-flex" style="border-bottom:1px solid #888;padding:10px 5px;">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('massage.seen', ['notification' => $notification]) }}">{{ Str::limit($notification->title, $limit = 20, $end = '...') }}
-                                                        <small class="pt-5"
-                                                            style="font-weight: 500; font-size:10px;margin:0 10px">({{ $notification->created_at->diffForHumans() }})</small></a>
-                                                    <a class="me-2 text-danger"
-                                                        href="{{ route('massage.seen', ['notification' => $notification, 'seen' => 1]) }}">X</a>
-                                                </li>
-                                            @endforeach
-                                        @else
-                                            <p class="p-2 text-danger">Not notifications found</p>
-                                    </ul>
-                                    @endif
-                                </div>
-
-
-
-                            @endauth
-                            <!-- Header Cart End -->
+                        <div class="cart-action">
+                            <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
+                            <a href="checkout.html" class="btn btn-primary  btn-rounded">Checkout</a>
                         </div>
                     </div>
+                    <!-- End of Dropdown Box -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- Ec Header Button End -->
-    <!-- Header responsive Bottom  Start -->
-    <div class="ec-header-bottom d-lg-none">
-        <div class="container position-relative">
-            <div class="row justify-content-center m-0">
-                <div class="ec-header-user dropdown col-12 my-3">
+    <!-- End of Header Middle -->
 
-                    <form class="ec-btn-group-form d-flex " action="{{ route('shops') }}" method="get"
-                        style="">
+    <div class="header-bottom sticky-content fix-top sticky-header has-dropdown">
+        <div class="container">
+            <div class="inner-wrap">
+                <div class="header-left">
+                    <div class="dropdown category-dropdown has-border" data-visible="true">
+                        <a href="#" class="category-toggle text-dark" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true" data-display="static"
+                            title="Browse Categories">
+                            <i class="w-icon-category"></i>
+                            <span>Browse Categories</span>
+                        </a>
 
-                        <input class="form-control ec-search-bar" style="border: 1px solid #373737;" name="search"
-                            value="{{ request('search') }}" placeholder="Search products..." type="text">
-                        <button class="submit header-search-btn "
-                            style="width: 75px !important;border-top-right-radius: 6px !important;border-bottom-right-radius: 6px !important;"
-                            type="submit"><i class="fi-rr-search"></i></button>
+                        <div class="dropdown-box">
+                            <ul class="menu vertical-menu category-menu">
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-tshirt2"></i>Fashion
+                                    </a>
+                                    <ul class="megamenu">
+                                        <li>
+                                            <h4 class="menu-title">Women</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">New Arrivals</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Best Sellers</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Trending</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Clothing</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Shoes</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Bags</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Accessories</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Jewlery &
+                                                        Watches</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4 class="menu-title">Men</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">New Arrivals</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Best Sellers</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Trending</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Clothing</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Shoes</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Bags</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Accessories</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Jewlery &
+                                                        Watches</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="banner-fixed menu-banner menu-banner2">
+                                                <figure>
+                                                    <img src="assets/images/menu/banner-2.jpg" alt="Menu Banner"
+                                                        width="235" height="347" />
+                                                </figure>
+                                                <div class="banner-content">
+                                                    <div class="banner-price-info mb-1 ls-normal">Get up to
+                                                        <strong
+                                                            class="text-primary text-uppercase">20%Off</strong>
+                                                    </div>
+                                                    <h3 class="banner-title ls-normal">Hot Sales</h3>
+                                                    <a href="shop-banner-sidebar.html"
+                                                        class="btn btn-dark btn-sm btn-link btn-slide-right btn-icon-right">
+                                                        Shop Now<i class="w-icon-long-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-home"></i>Home & Garden
+                                    </a>
+                                    <ul class="megamenu">
+                                        <li>
+                                            <h4 class="menu-title">Bedroom</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Beds, Frames &
+                                                        Bases</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Dressers</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Nightstands</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Kid's Beds &
+                                                        Headboards</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Armoires</a></li>
+                                            </ul>
 
-                    </form>
+                                            <h4 class="menu-title mt-1">Living Room</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Coffee Tables</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Chairs</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Tables</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Futons & Sofa
+                                                        Beds</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Cabinets &
+                                                        Chests</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4 class="menu-title">Office</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Office Chairs</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Desks</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Bookcases</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">File Cabinets</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Breakroom
+                                                        Tables</a></li>
+                                            </ul>
 
-                </div>
+                                            <h4 class="menu-title mt-1">Kitchen & Dining</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Dining Sets</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Kitchen Storage
+                                                        Cabinets</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Bashers Racks</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Dining Chairs</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Dining Room
+                                                        Tables</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Bar Stools</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="menu-banner banner-fixed menu-banner3">
+                                                <figure>
+                                                    <img src="assets/images/menu/banner-3.jpg" alt="Menu Banner"
+                                                        width="235" height="461" />
+                                                </figure>
+                                                <div class="banner-content">
+                                                    <h4
+                                                        class="banner-subtitle font-weight-normal text-white mb-1">
+                                                        Restroom</h4>
+                                                    <h3
+                                                        class="banner-title font-weight-bolder text-white ls-normal">
+                                                        Furniture Sale</h3>
+                                                    <div
+                                                        class="banner-price-info text-white font-weight-normal ls-25">
+                                                        Up to <span
+                                                            class="text-secondary text-uppercase font-weight-bold">25%
+                                                            Off</span></div>
+                                                    <a href="shop-banner-sidebar.html"
+                                                        class="btn btn-white btn-link btn-sm btn-slide-right btn-icon-right">
+                                                        Shop Now<i class="w-icon-long-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-electronics"></i>Electronics
+                                    </a>
+                                    <ul class="megamenu">
+                                        <li>
+                                            <h4 class="menu-title">Laptops &amp; Computers</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Desktop
+                                                        Computers</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Monitors</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Laptops</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Hard Drives &amp;
+                                                        Storage</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Computer
+                                                        Accessories</a></li>
+                                            </ul>
 
-                <!-- Ec Header Logo Start -->
-                <div class="col mobile-logo">
-                    <div class="header-logo">
-                        <a href="{{ route('homepage') }}"><img src="{{ Voyager::image(setting('site.logo')) }}"
-                                alt="{{ setting('site.title') }}"></a>
+                                            <h4 class="menu-title mt-1">TV &amp; Video</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">TVs</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Home Audio
+                                                        Speakers</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Projectors</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Media Streaming
+                                                        Devices</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <h4 class="menu-title">Digital Cameras</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Digital SLR
+                                                        Cameras</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Sports & Action
+                                                        Cameras</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Camera Lenses</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Photo Printer</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Digital Memory
+                                                        Cards</a></li>
+                                            </ul>
+
+                                            <h4 class="menu-title mt-1">Cell Phones</h4>
+                                            <hr class="divider">
+                                            <ul>
+                                                <li><a href="shop-fullwidth-banner.html">Carrier Phones</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Unlocked Phones</a>
+                                                </li>
+                                                <li><a href="shop-fullwidth-banner.html">Phone & Cellphone
+                                                        Cases</a></li>
+                                                <li><a href="shop-fullwidth-banner.html">Cellphone
+                                                        Chargers</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="menu-banner banner-fixed menu-banner4">
+                                                <figure>
+                                                    <img src="assets/images/menu/banner-4.jpg" alt="Menu Banner"
+                                                        width="235" height="433" />
+                                                </figure>
+                                                <div class="banner-content">
+                                                    <h4 class="banner-subtitle font-weight-normal">Deals Of The
+                                                        Week</h4>
+                                                    <h3 class="banner-title text-white">Save On Smart EarPhone
+                                                    </h3>
+                                                    <div
+                                                        class="banner-price-info text-secondary font-weight-bolder text-uppercase text-secondary">
+                                                        20% Off</div>
+                                                    <a href="shop-banner-sidebar.html"
+                                                        class="btn btn-white btn-outline btn-sm btn-rounded">Shop
+                                                        Now</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-furniture"></i>Furniture
+                                    </a>
+                                    <ul class="megamenu type2">
+                                        <li class="row">
+                                            <div class="col-md-3 col-lg-3 col-6">
+                                                <h4 class="menu-title">Furniture</h4>
+                                                <hr class="divider" />
+                                                <ul>
+                                                    <li><a href="shop-fullwidth-banner.html">Sofas & Couches</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Armchairs</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Bed Frames</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Beside Tables</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Dressing Tables</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-6">
+                                                <h4 class="menu-title">Lighting</h4>
+                                                <hr class="divider" />
+                                                <ul>
+                                                    <li><a href="shop-fullwidth-banner.html">Light Bulbs</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Lamps</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Celling Lights</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Wall Lights</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Bathroom
+                                                            Lighting</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-6">
+                                                <h4 class="menu-title">Home Accessories</h4>
+                                                <hr class="divider" />
+                                                <ul>
+                                                    <li><a href="shop-fullwidth-banner.html">Decorative
+                                                            Accessories</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Candals &
+                                                            Holders</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Home Fragrance</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Mirrors</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Clocks</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-6">
+                                                <h4 class="menu-title">Garden & Outdoors</h4>
+                                                <hr class="divider" />
+                                                <ul>
+                                                    <li><a href="shop-fullwidth-banner.html">Garden
+                                                            Furniture</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Lawn Mowers</a>
+                                                    </li>
+                                                    <li><a href="shop-fullwidth-banner.html">Pressure
+                                                            Washers</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">All Garden
+                                                            Tools</a></li>
+                                                    <li><a href="shop-fullwidth-banner.html">Outdoor Dining</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="row">
+                                            <div class="col-6">
+                                                <div class="banner banner-fixed menu-banner5 br-xs">
+                                                    <figure>
+                                                        <img src="assets/images/menu/banner-5.jpg" alt="Banner"
+                                                            width="410" height="123"
+                                                            style="background-color: #D2D2D2;" />
+                                                    </figure>
+                                                    <div class="banner-content text-right y-50">
+                                                        <h4
+                                                            class="banner-subtitle font-weight-normal text-default text-capitalize">
+                                                            New Arrivals</h4>
+                                                        <h3
+                                                            class="banner-title font-weight-bolder text-capitalize ls-normal">
+                                                            Amazing Sofa</h3>
+                                                        <div
+                                                            class="banner-price-info font-weight-normal ls-normal">
+                                                            Starting at <strong>$125.00</strong></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="banner banner-fixed menu-banner5 br-xs">
+                                                    <figure>
+                                                        <img src="assets/images/menu/banner-6.jpg" alt="Banner"
+                                                            width="410" height="123"
+                                                            style="background-color: #9F9888;" />
+                                                    </figure>
+                                                    <div class="banner-content y-50">
+                                                        <h4
+                                                            class="banner-subtitle font-weight-normal text-white text-capitalize">
+                                                            Best Seller</h4>
+                                                        <h3
+                                                            class="banner-title font-weight-bolder text-capitalize text-white ls-normal">
+                                                            Chair &amp; Lamp</h3>
+                                                        <div
+                                                            class="banner-price-info font-weight-normal ls-normal text-white">
+                                                            From <strong>$165.00</strong></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-heartbeat"></i>Healthy & Beauty
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-gift"></i>Gift Ideas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-gamepad"></i>Toy & Games
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-ice-cream"></i>Cooking
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-ios"></i>Smart Phones
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-camera"></i>Cameras & Photo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-fullwidth-banner.html">
+                                        <i class="w-icon-ruby"></i>Accessories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shop-banner-sidebar.html"
+                                        class="font-weight-bold text-primary text-uppercase ls-25">
+                                        View All Categories<i class="w-icon-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header responsive Bottom  End -->
-    <!-- EC Main Menu Start -->
-    <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
-        <div class="container position-relative">
-            <div class="row">
-                <div class="col-md-12 align-self-center my-3">
-                    <div class="ec-main-menu">
-                        <ul>
+                    <nav class="main-nav">
+                        <ul class="menu active-underline">
+                            <li class="active">
+                                <a href="demo1.html">Home</a>
+                            </li>
                             <li>
-                                <div class="ec-select-inner category-drop  sellers-dropdown mid-header"
-                                    style="background-color: #000000;border-radius: 10px">
-                                    <select name="ec-select custom-select"
-                                        @php $vendor_route=route('vendors') ; @endphp
-                                        onchange='updateSearchParams("category",this.value,"{{ $vendor_route }}")'
-                                        class="cat-select" id="ec-select"
-                                        style="font-weight: 600;color:#fff !important;font-size:16px;">
+                                <a href="shop-banner-sidebar.html">Shop</a>
 
-                                        <option value="1">
-
-
-                                            Browse Shop By Category
-                                        </option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->slug }}"
-                                                @if (request('category') == $category->slug) selected @endif
-                                                style="font-weight:500">
-                                                {{ $category->name }}
-                                            </option>
-                                            @foreach ($category->childrens as $child)
-                                                <option value="{{ $child->slug }}"
-                                                    @if (request('category') == $child->slug) selected @endif
-                                                    style="font-weight:300">
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $child->name }}
-                                                </option>
-                                            @endforeach
-                                        @endforeach
-
-
-
-                                    </select>
-                                </div>
+                                <!-- Start of Megamenu -->
+                                <ul class="megamenu">
+                                    <li>
+                                        <h4 class="menu-title">Shop Pages</h4>
+                                        <ul>
+                                            <li><a href="shop-banner-sidebar.html">Banner With Sidebar</a></li>
+                                            <li><a href="shop-boxed-banner.html">Boxed Banner</a></li>
+                                            <li><a href="shop-fullwidth-banner.html">Full Width Banner</a></li>
+                                            <li><a href="shop-horizontal-filter.html">Horizontal Filter<span
+                                                        class="tip tip-hot">Hot</span></a></li>
+                                            <li><a href="shop-off-canvas.html">Off Canvas Sidebar<span
+                                                        class="tip tip-new">New</span></a></li>
+                                            <li><a href="shop-infinite-scroll.html">Infinite Ajax Scroll</a>
+                                            </li>
+                                            <li><a href="shop-right-sidebar.html">Right Sidebar</a></li>
+                                            <li><a href="shop-both-sidebar.html">Both Sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h4 class="menu-title">Shop Layouts</h4>
+                                        <ul>
+                                            <li><a href="shop-grid-3cols.html">3 Columns Mode</a></li>
+                                            <li><a href="shop-grid-4cols.html">4 Columns Mode</a></li>
+                                            <li><a href="shop-grid-5cols.html">5 Columns Mode</a></li>
+                                            <li><a href="shop-grid-6cols.html">6 Columns Mode</a></li>
+                                            <li><a href="shop-grid-7cols.html">7 Columns Mode</a></li>
+                                            <li><a href="shop-grid-8cols.html">8 Columns Mode</a></li>
+                                            <li><a href="shop-list.html">List Mode</a></li>
+                                            <li><a href="shop-list-sidebar.html">List Mode With Sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h4 class="menu-title">Product Pages</h4>
+                                        <ul>
+                                            <li><a href="product-variable.html">Variable Product</a></li>
+                                            <li><a href="product-featured.html">Featured &amp; Sale</a></li>
+                                            <li><a href="product-accordion.html">Data In Accordion</a></li>
+                                            <li><a href="product-section.html">Data In Sections</a></li>
+                                            <li><a href="product-swatch.html">Image Swatch</a></li>
+                                            <li><a href="product-extended.html">Extended Info</a>
+                                            </li>
+                                            <li><a href="product-without-sidebar.html">Without Sidebar</a></li>
+                                            <li><a href="product-video.html">360<sup>o</sup> &amp; Video<span
+                                                        class="tip tip-new">New</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h4 class="menu-title">Product Layouts</h4>
+                                        <ul>
+                                            <li><a href="product-default.html">Default<span
+                                                        class="tip tip-hot">Hot</span></a></li>
+                                            <li><a href="product-vertical.html">Vertical Thumbs</a></li>
+                                            <li><a href="product-grid.html">Grid Images</a></li>
+                                            <li><a href="product-masonry.html">Masonry</a></li>
+                                            <li><a href="product-gallery.html">Gallery</a></li>
+                                            <li><a href="product-sticky-info.html">Sticky Info</a></li>
+                                            <li><a href="product-sticky-thumb.html">Sticky Thumbs</a></li>
+                                            <li><a href="product-sticky-both.html">Sticky Both</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <!-- End of Megamenu -->
                             </li>
-                            <li><a href="{{ route('shops', ['filter_products' => 'trending']) }}"
-                                    style="font-size: 14px">Trending </a></li>
-                            <li class=""><a href="{{ route('shops', ['filter_products' => 'most-popular']) }}"
-                                    style="font-size: 14px">Best
-                                    Seller</a>
-
-
-                            </li>
-                            <li class="dropdown"><a href="javascript:void(0)">Saves</a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('wishlist.index') }}">Save Products</a></li>
-                                    <li><a href="{{ route('follow.shops') }}">Followed Shops</a></li>
-
+                            <li>
+                                <a href="vendor-dokan-store.html">Vendor</a>
+                                <ul>
+                                    <li>
+                                        <a href="vendor-dokan-store-list.html">Store Listing</a>
+                                        <ul>
+                                            <li><a href="vendor-dokan-store-list.html">Store listing 1</a></li>
+                                            <li><a href="vendor-wcfm-store-list.html">Store listing 2</a></li>
+                                            <li><a href="vendor-wcmp-store-list.html">Store listing 3</a></li>
+                                            <li><a href="vendor-wc-store-list.html">Store listing 4</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="vendor-dokan-store.html">Vendor Store</a>
+                                        <ul>
+                                            <li><a href="vendor-dokan-store.html">Vendor Store 1</a></li>
+                                            <li><a href="vendor-wcfm-store-product-grid.html">Vendor Store 2</a>
+                                            </li>
+                                            <li><a href="vendor-wcmp-store-product-grid.html">Vendor Store 3</a>
+                                            </li>
+                                            <li><a href="vendor-wc-store-product-grid.html">Vendor Store 4</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
-
-
-                            <!-- <li class="dropdown "><a href=""  style="font-size: 14px">Reciving
-                                    Method <i class="fa-solid fa-angle-down ms-3"></i></a>
-
-                            </li> -->
-                            <li class="dropdown"><a href="{{ url('/vendors') }}" id=""
-                                    style="font-size: 14px">Vendors </a>
-
+                            <li>
+                                <a href="blog.html">Blog</a>
+                                <ul>
+                                    <li><a href="blog.html">Classic</a></li>
+                                    <li><a href="blog-listing.html">Listing</a></li>
+                                    <li>
+                                        <a href="blog-grid-3cols.html">Grid</a>
+                                        <ul>
+                                            <li><a href="blog-grid-2cols.html">Grid 2 columns</a></li>
+                                            <li><a href="blog-grid-3cols.html">Grid 3 columns</a></li>
+                                            <li><a href="blog-grid-4cols.html">Grid 4 columns</a></li>
+                                            <li><a href="blog-grid-sidebar.html">Grid sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="blog-masonry-3cols.html">Masonry</a>
+                                        <ul>
+                                            <li><a href="blog-masonry-2cols.html">Masonry 2 columns</a></li>
+                                            <li><a href="blog-masonry-3cols.html">Masonry 3 columns</a></li>
+                                            <li><a href="blog-masonry-4cols.html">Masonry 4 columns</a></li>
+                                            <li><a href="blog-masonry-sidebar.html">Masonry sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="blog-mask-grid.html">Mask</a>
+                                        <ul>
+                                            <li><a href="blog-mask-grid.html">Blog mask grid</a></li>
+                                            <li><a href="blog-mask-masonry.html">Blog mask masonry</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="post-single.html">Single Post</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="dropdown"><a href="#footer" id="" style="font-size: 14px">Help <i
-                                        class="far fa-question-circle ml-1"></i></a>
+                            <li>
+                                <a href="about-us.html">Pages</a>
+                                <ul>
 
+                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a href="become-a-vendor.html">Become A Vendor</a></li>
+                                    <li><a href="contact-us.html">Contact Us</a></li>
+                                    <li><a href="faq.html">FAQs</a></li>
+                                    <li><a href="error-404.html">Error 404</a></li>
+                                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="my-account.html">My Account</a></li>
+                                    <li><a href="compare.html">Compare</a></li>
+                                </ul>
                             </li>
-                            <li class="dropdown"><a href="javascript:void(0)" data-bs-toggle="modal"
-                                    data-bs-target="#location" style="font-size: 14px;width:70%;line-height: 16px;"><i
-                                        class="fas fa-map-marker-alt mr-1" style="font-size: 18px"></i>
+                            <li>
+                                <a href="elements.html">Elements</a>
+                                <ul>
+                                    <li><a href="element-accordions.html">Accordions</a></li>
+                                    <li><a href="element-alerts.html">Alert &amp; Notification</a></li>
+                                    <li><a href="element-blog-posts.html">Blog Posts</a></li>
+                                    <li><a href="element-buttons.html">Buttons</a></li>
+                                    <li><a href="element-cta.html">Call to Action</a></li>
+                                    <li><a href="element-icons.html">Icons</a></li>
+                                    <li><a href="element-icon-boxes.html">Icon Boxes</a></li>
+                                    <li><a href="element-instagrams.html">Instagrams</a></li>
+                                    <li><a href="element-categories.html">Product Category</a></li>
+                                    <li><a href="element-products.html">Products</a></li>
+                                    <li><a href="element-tabs.html">Tabs</a></li>
+                                    <li><a href="element-testimonials.html">Testimonials</a></li>
+                                    <li><a href="element-titles.html">Titles</a></li>
+                                    <li><a href="element-typography.html">Typography</a></li>
 
-                                    @if (session()->has('state') || session()->has('post_city'))
-                                        @if (session()->has('post_city'))
-                                            @foreach (session()->get('post_city') as $item)
-                                                {{ $item }}
-                                            @endforeach,
-                                        @endif
-                                        {{ session()->get('state') }}
-                                    @else
-                                        Set Location
-                                    @endif
-                                </a>
-
+                                    <li><a href="element-vendors.html">Vendors</a></li>
+                                </ul>
                             </li>
-
-
-
                         </ul>
-                    </div>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <a href="#" class="d-xl-show"><i class="w-icon-map-marker mr-1"></i>Track Order</a>
+                    <a href="#"><i class="w-icon-sale"></i>Daily Deals</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Ec Main Menu End -->
-    <!-- ekka Mobile Menu Start -->
-    <div id="ec-mobile-menu" class="ec-side-cart ec-mobile-menu ">
-        <div class="ec-menu-title">
-            <span class="menu_title">My Menu</span>
-            <button class="ec-close">×</button>
-        </div>
-        <div class="ec-menu-inner">
-            <div class="ec-menu-content">
-                <ul>
-
-                    <li>
-                        <div class="ec-select-inner category-drop  sellers-dropdown mid-header mt-2"
-                            style="background-color: #000000;border-radius: 10px">
-                            <select name="ec-select custom-select" @php $vendor_route=route('vendors') ; @endphp
-                                onchange='updateSearchParams("category",this.value,"{{ $vendor_route }}")'
-                                class="cat-select" id="ec-select"
-                                style="font-weight: 600;color:#fff !important;font-size:16px;">
-
-                                <option value="1">
-
-
-                                    Browse Shop By Category
-                                </option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->slug }}"
-                                        @if (request('category') == $category->slug) selected @endif style="font-weight:500">
-                                        {{ $category->name }}
-                                    </option>
-                                    @foreach ($category->childrens as $child)
-                                        <option value="{{ $child->slug }}"
-                                            @if (request('category') == $child->slug) selected @endif style="font-weight:300">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $child->name }}
-                                        </option>
-                                    @endforeach
-                                @endforeach
-
-
-
-                            </select>
-                        </div>
-                    </li>
-                    <li class="text-center"><a href="{{ route('login') }}"><i class="fi-rr-user"
-                                style="font-size: 20px"></i> login / Register</a></li>
-                    <li><a href="{{ route('homepage') }}">Home</a></li>
-                    <li><a href="{{ route('shops', ['filter_products' => 'trending']) }}"
-                            style="font-size: 14px">Trending </a></li>
-                    <li class=""><a href="{{ route('shops', ['filter_products' => 'most-popular']) }}"
-                            style="font-size: 14px">Best
-                            Seller</a>
-
-
-                    </li>
-                    <li class="dropdown"><a href="javascript:void(0)">Saves</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('wishlist.index') }}">Save Products</a></li>
-                            <li><a href="{{ route('follow.shops') }}">Followed Shops</a></li>
-
-                        </ul>
-                    </li>
-
-                    <li class="dropdown"><a href="{{ url('/vendors') }}" id=""
-                            style="font-size: 14px">Vendors </a>
-
-                    </li>
-                    <li class="dropdown"><a href="#footer" id="" style="font-size: 14px">Help <i
-                                class="far fa-question-circle ml-1"></i></a>
-
-                    </li>
-
-
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!-- ekka mobile Menu End -->
 </header>
 
 <!-- Header End  -->
 
-<!-- ekka Cart Start -->
+{{-- <!-- ekka Cart Start -->
 <div class="ec-side-cart-overlay" @if (Request('cart') == 'show') style="display:block" @endif></div>
 <div id="ec-side-cart" class="ec-side-cart {{ Request('cart') == 'show' ? 'ec-open' : '' }}">
     <div class="ec-cart-inner">
@@ -642,10 +814,7 @@
                                 <td class="text-left">Sub-Total :</td>
                                 <td class="text-right">${{ Cart::getSubTotal() }}</td>
                             </tr>
-                            {{-- <tr>
-                            <td class="text-left">VAT (20%) :</td>
-                            <td class="text-right">{{ Sohoj::price(Sohoj::tax()) }}</td>
-                        </tr> --}}
+                   
                             <tr>
                                 <td class="text-left">Total :</td>
                                 <td class="text-right primary-color">${{ Cart::getTotal() }}</td>
@@ -663,10 +832,10 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 
 
-<div class="modal fade" id="location" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="location" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -699,8 +868,7 @@
                         </div>
                         <div class="input-group-append location-city">
 
-                            {{-- <input type="text" name="post_city" id="cityInput" class="form-control"
-                                placeholder="    your city or post code" value="{{session('post_city')}}"> --}}
+                           
                             <select multiple name="post_city[]" id="cityInput" class="form-select"
                                 style="border: .5px solid !important; border-radius:0 !important;">
 
@@ -715,12 +883,12 @@
                     <button type="submit" id="" class="btn btn-dark "
                         data-bs-dismiss="modal">Search</button>
                     <a href="{{ route('location.reset') }}" class="btn btn-danger">Reset</a>
-                    <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+         
                 </div>
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 {{-- <div class="modal fade" id="location" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -741,7 +909,7 @@
         </div>
     </div>
 </div> --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
     $(document).ready(function() {
